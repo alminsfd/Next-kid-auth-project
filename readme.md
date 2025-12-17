@@ -14,6 +14,11 @@ Hero Kidzz is a small, single-vendor e-commerce web application designed for sel
 - 🎨 **Responsive Design** - Mobile-friendly interface
 - ⭐ **Product Reviews** - Customer feedback system
 
+## Starter packages
+```
+npm install react-icons mongodb bcryptjs
+```
+
 ## Colors
 
 ```
