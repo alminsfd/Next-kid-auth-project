@@ -2,10 +2,17 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layouts/Navbar";
 import Footer from "@/components/layouts/Footer";
+import localFont from 'next/font/local'
 const poopin = Poppins({
   weight: ['100', '200', '400', '500', '600', '800']
 
 })
+
+ export const myFont = localFont({
+  src: '../fonts/mayaboti-normal.ttf',
+}
+
+)
 
 export const metadata = {
   title: "Herokids",
@@ -16,12 +23,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${poopin.className}  antialiased`}
+        className={`${poopin.className}  antialiased  `}
       >
         <header className="py-2 md:w-11/12 mx-auto" >
           <Navbar></Navbar>
         </header>
-        <main className="py-2 md:w-11/12 mx-auto" >
+        <main className="py-2 md:w-11/12 mx-auto min-h-[calc(100vh-301px)]" >
           {children}
         </main>
         <footer>
