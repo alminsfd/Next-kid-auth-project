@@ -8,15 +8,18 @@ const poopin = Poppins({
 
 })
 
- export const myFont = localFont({
+export const myFont = localFont({
   src: '../fonts/mayaboti-normal.ttf',
 }
 
 )
 
 export const metadata = {
-  title: "Herokids",
-  description: "for children awosomeness",
+  title: {
+    default: 'Hero Kid - Best Toy Store for Kids',
+    template: ' %s | Hero Kid',
+  },
+  description: "Some awosomeness for children ",
 };
 
 export default function RootLayout({ children }) {

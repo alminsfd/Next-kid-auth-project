@@ -63,7 +63,7 @@ export default async function generateMetadata({ params }) {
                     </div>
 
                     {/* Actions */}
-                    {/* <CartButton product={product}></CartButton> */}
+                    {/* <CartButton product={product}></CartButton>  */}
                </div>
                <div className="col-span-full">
                     {/* Description */}
