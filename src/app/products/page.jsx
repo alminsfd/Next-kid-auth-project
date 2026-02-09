@@ -3,9 +3,24 @@ import Products from '@/components/Home/Products';
 import React from 'react';
 
 export const metadata = {
-     title: "AllProducts - Herokids",
-     description: "Explore our wide range of toys and games for children of all ages. Find the perfect gift for your little hero at Herokids.",
+     title: "All Products – Educational Toys for Kids",
+     description:
+          "Browse all educational toys and learning boards for kids. Safe, fun, and creativity-boosting toys at Hero Kids.",
+     openGraph: {
+          title: "All Products | Hero Kids",
+          description:
+               "Explore our full collection of smart and educational toys for kids.",
+          images: [
+               {
+                    url: "https://i.ibb.co.com/nM8x59SL/Allproducts.png",
+                    width: 1200,
+                    height: 630,
+                    alt: "Hero Kids All Products",
+               },
+          ],
+     },
 };
+
 const page = () => {
      return (
           <div>

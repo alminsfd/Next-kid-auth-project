@@ -2,7 +2,56 @@ import { getProductById } from "@/action/server/product"
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
 
-export default async function generateMetadata({ params }) {
+
+export async function generateMetadata({ params }) {
+     const { id } = await params
+     const product = await getProductById(id);
+
+     if (!product?._id) {
+          return {
+               title: "Product Not Found | Hero Kids",
+               description: "This product does not exist.",
+          };
+     }
+
+     const {
+          title,
+          bangla,
+          image,
+          price,
+          ratings,
+          reviews,
+          sold,
+     } = product;
+
+     return {
+          title: `${title} – Educational Toy for Kids`,
+          description: `${title} (${bangla}) – Safe and fun educational toy for kids. Rated ${ratings}⭐ by ${reviews} reviews. ${sold}+ sold.`,
+
+          openGraph: {
+               title: title,
+               description: `${bangla} | ⭐ ${ratings} (${reviews} reviews) | ${sold}+ sold`,
+               images: [
+                    {
+                         url: image,
+                         width: 1200,
+                         height: 630,
+                         alt: title,
+                    },
+               ],
+               type: "website",
+          },
+          twitter: {
+               card: "summary_large_image",
+               title: title,
+               description: `${bangla} – Smart learning toy for kids`,
+               images: [image],
+          },
+     };
+}
+
+
+export default async function generateAlldata({ params }) {
      const { id } = await params
      const product = await getProductById(id)
      const {
