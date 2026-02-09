@@ -1,4 +1,5 @@
 import { getProductById } from "@/action/server/product"
+import CartButton from "@/components/buttons/CartButton";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
 
@@ -7,7 +8,7 @@ export async function generateMetadata({ params }) {
      const { id } = await params
      const product = await getProductById(id);
 
-     if (!product?._id) {
+     if (!product?.id) {
           return {
                title: "Product Not Found | Hero Kids",
                description: "This product does not exist.",
@@ -18,7 +19,6 @@ export async function generateMetadata({ params }) {
           title,
           bangla,
           image,
-          price,
           ratings,
           reviews,
           sold,
@@ -112,7 +112,7 @@ export default async function generateAlldata({ params }) {
                     </div>
 
                     {/* Actions */}
-                    {/* <CartButton product={product}></CartButton>  */}
+                    <CartButton product={product}></CartButton>
                </div>
                <div className="col-span-full">
                     {/* Description */}

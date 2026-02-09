@@ -16,5 +16,6 @@ export const getProductById = async (id) => {
      const query = { _id: new ObjectId(id) }
      const res = await dbConnected(Collectins.Products).findOne(query)
      if (!res) return {};
-     return { ...res, id: res._id.toString() }
+     const { _id, ...rest } = res;
+     return { ...rest, id: res._id.toString() || {} }
 }

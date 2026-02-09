@@ -45,7 +45,7 @@ export const metadata = {
     title: "Hero Kids – Educational Toys for Kids",
     description:
       "Discover fun and educational toys for kids. Learning boards, smart toys, and more at Hero Kids.",
-    url: "https://herokids.com",
+    url: "https://hero-kid-beta.vercel.app",
     siteName: "Hero Kids",
     images: [
       {
