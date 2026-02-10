@@ -1,23 +1,21 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { FaCartPlus } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 const CartButton = ({ product }) => {
      const route = useRouter();
+     const session = useSession()
      const path = usePathname()
-     const Islogin = false; // Replace with actual login state
+     const Islogin = session.status === "authenticated"; // Replace with actual login state
      const handleAdd2Cart = () => {
           if (!Islogin) {
-               alert("Please log in to add items to your cart.");
-               return;
+               Swal.fire("Login required!", "Please log in to add items to your cart.", "warning")
+               route.push(`/login?callback=${path}`);
           }
-          // Implement add to cart functionality here
-          route.push(`/login?callback=${path}`);
-
-
-
      }
      return (
           <div>

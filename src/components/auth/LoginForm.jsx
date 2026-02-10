@@ -4,8 +4,12 @@ import React, { useState } from 'react';
 import SocialButtons from './SocialButtons';
 import { signIn } from "next-auth/react"
 import Swal from 'sweetalert2';
+import { useRouter, useSearchParams } from 'next/navigation';
+
 
 const LoginForm = () => {
+     const router = useRouter()
+     const params = useSearchParams()
      const [form, setForm] = useState({
           email: "",
           password: "",
@@ -28,6 +32,7 @@ const LoginForm = () => {
                Swal.fire("Login failed!", "Invalid email or password.", "error")
           } else {
                Swal.fire("Password matched!", "You are successfully logged in.", "success")
+               router.push(params.get("callback") || "/")
           }
      }
      return (

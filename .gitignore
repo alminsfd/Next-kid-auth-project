@@ -35,6 +35,7 @@ yarn-error.log*
 
 # vercel
 .vercel
+hero_auth_kids.json
 
 # typescript
 *.tsbuildinfo
