@@ -3,6 +3,7 @@ import Logo from './Logo';
 import Navlink from '../buttons/Navlink';
 import Link from 'next/link';
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import Authbutton from '../buttons/Authbutton';
 
 const Navbar = () => {
      const Nav = <>
@@ -39,7 +40,7 @@ const Navbar = () => {
                          <Link href="/cart" className="btn btn-ghost btn-circle btn-primary">
                               <AiOutlineShoppingCart className='text-2xl' />
                          </Link>
-                         <Link href="/login" className="btn btn-primary btn-outline">Login</Link>
+                         <Authbutton></Authbutton>
                     </div>
                </div>
           </div>

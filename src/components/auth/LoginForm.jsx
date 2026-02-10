@@ -1,11 +1,34 @@
 'use client';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import SocialButtons from './SocialButtons';
+import { signIn } from "next-auth/react"
+import Swal from 'sweetalert2';
 
 const LoginForm = () => {
-     const handleSubmit = (e) => {
+     const [form, setForm] = useState({
+          email: "",
+          password: "",
+     })
+     const onchange = (e) => {
+          setForm({ ...form, [e.target.name]: e.target.value })
+
+     }
+     const handleSubmit = async (e) => {
           e.preventDefault();
+          const result = await signIn('credentials',
+               {
+                    email: form.email,
+                    password: form.password,
+                    redirect: false,
+               }
+          )
+
+          if (!result.ok) {
+               Swal.fire("Login failed!", "Invalid email or password.", "error")
+          } else {
+               Swal.fire("Password matched!", "You are successfully logged in.", "success")
+          }
      }
      return (
           <div className="min-h-screen flex items-center justify-center bg-base-200">
@@ -18,6 +41,7 @@ const LoginForm = () => {
                                    type="email"
                                    name="email"
                                    placeholder="Email"
+                                   onChange={onchange}
                                    className="input input-bordered w-full"
                                    required
                               />
@@ -25,6 +49,7 @@ const LoginForm = () => {
                               <input
                                    type="password"
                                    name="password"
+                                   onChange={onchange}
                                    placeholder="Password"
                                    className="input input-bordered w-full"
                                    required
@@ -51,5 +76,6 @@ const LoginForm = () => {
           </div>
      );
 };
+
 
 export default LoginForm;

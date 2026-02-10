@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/layouts/Navbar";
 import Footer from "@/components/layouts/Footer";
 import localFont from 'next/font/local'
+import SessionProviderpage from "@/provider/SessionProviderpage";
 const poopin = Poppins({
   weight: ['100', '200', '400', '500', '600', '800']
 
@@ -106,20 +107,22 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className={`${poopin.className}  antialiased  `}
-      >
-        <header className="py-2 md:w-11/12 mx-auto" >
-          <Navbar></Navbar>
-        </header>
-        <main className="py-2 md:w-11/12 mx-auto min-h-[calc(100vh-301px)]" >
-          {children}
-        </main>
-        <footer>
-          <Footer></Footer>
-        </footer>
-      </body>
-    </html>
+    <SessionProviderpage>
+      <html lang="en">
+        <body
+          className={`${poopin.className}  antialiased  `}
+        >
+          <header className="py-2 md:w-11/12 mx-auto" >
+            <Navbar></Navbar>
+          </header>
+          <main className="py-2 md:w-11/12 mx-auto min-h-[calc(100vh-301px)]" >
+            {children}
+          </main>
+          <footer>
+            <Footer></Footer>
+          </footer>
+        </body>
+      </html>
+    </SessionProviderpage>
   );
 }
