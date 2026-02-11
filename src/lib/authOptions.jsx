@@ -2,6 +2,7 @@ import { loginUser } from "@/action/server/auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google";
 import { Collectins, dbConnected } from "./dbconnect";
+import { use } from "react";
 const authOptions = {
      // Configure one or more authentication providers
      providers: [
@@ -28,11 +29,11 @@ const authOptions = {
      ],
      callbacks: {
           async signIn({ user, account, profile, email, credentials }) {
-               console.log("signIn callback:", { user, account, profile, email, credentials });
+               // console.log("signIn callback:", { user, account, profile, email, credentials });
 
                const isExits = await dbConnected(Collectins.Users).findOne({
                     email: user.email,
-                    provider: account.provider
+                    // provider: account.provider
                })
                if (isExits) {
                     return true
@@ -51,12 +52,31 @@ const authOptions = {
           // async redirect({ url, baseUrl }) {
           //      return baseUrl
           // },
-          // async session({ session, user, token }) {
-          //      return session
-          // },
-          // async jwt({ token, user, account, profile, isNewUser }) {
-          //      return token
-          // }
+          async session({ session, user, token }) {
+               if (token) {
+                    session.role = token?.role
+                    session.email = token?.email
+               }
+               return session
+          },
+          async jwt({ token, user, account, profile, isNewUser }) {
+               console.log({ account })
+               if (user) {
+                    if (account.provider == 'google') {
+                         const dbUser = await dbConnected(Collectins.Users).findOne({
+                              email: user.email
+                         })
+                         token.role = dbUser?.role
+                         token.email = dbUser?.email
+
+                    } else {
+                         token.role = user?.role
+                         token.email = user?.email
+                    }
+
+               }
+               return token
+          }
 
      }
 }
