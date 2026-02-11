@@ -70,7 +70,7 @@ const LoginForm = () => {
                          <p className="text-center text-sm mt-4">
                               Don’t have an account?{" "}
                               <Link
-                                   href={`/register?callbackUrl=${''}`}
+                                   href={`/register?callback=${params.get("callback") || "/"}`}
                                    className="link link-primary"
                               >
                                    Register

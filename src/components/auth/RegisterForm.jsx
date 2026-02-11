@@ -2,11 +2,13 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 import SocialButtons from './SocialButtons';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { postUser } from '@/action/server/auth';
+import Swal from 'sweetalert2';
 
 
 const RegisterForm = () => {
+     const params = useSearchParams()
      const router = useRouter();
      const [form, setForm] = useState({
           name: "",
@@ -22,10 +24,10 @@ const RegisterForm = () => {
           e.preventDefault();
           const result = await postUser(form);
           if (result && result.insertedId) {
-               alert("Registration successful! Please login to continue.");
-               router.push("/login");
+               Swal.fire("Registration successful!", "Your account has been created successfully.", "success")
+               router.push(params.get("callback") || "/login")
           } else {
-               alert("Registration failed. User may already exist.");
+               Swal.fire("Registration failed!", "User may already exist or an error occurred.", "error")
           }
 
      }
